@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DanhMucCongTyController;
 use App\Http\Controllers\Admin\GroupsController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Api\RegisterController;
@@ -52,6 +53,12 @@ Route::post('logout',[RegisterController::class,'logout']);
 Route::prefix('admin')->name('admin.')->middleware('jwt.auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
    
+    // crud danh muc cong ty
+    Route::get('/danh-muc-cong-ty', [DanhMucCongTyController::class, 'index'])->name('GetDanhMucCongTy');
+    Route::post('/danh-muc-cong-ty/create', [DanhMucCongTyController::class, 'store'])->name('addDanhMucCongTy');
+    Route::post('/danh-muc-cong-ty/edit/{id}', [DanhMucCongTyController::class, 'update'])->name('updateDanhMucCongTy');
+    Route::delete('/danh-muc-cong-ty/delete/{id}', [DanhMucCongTyController::class, 'destroy'])->name('deleteDanhMucCongTy');
+
     // posts
     Route::prefix('post')->name('posts.')->group(function () {
         Route::get('/', [PostsController::class, 'index'])->name('index');
