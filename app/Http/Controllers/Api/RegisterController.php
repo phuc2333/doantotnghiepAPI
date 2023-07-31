@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
-
+use Carbon\Carbon;
 class RegisterController extends Controller
 {
     public function login(Request $request)
@@ -34,8 +34,13 @@ class RegisterController extends Controller
         ];
 
         $token = JWTAuth::customClaims($data)->attempt($credentials); // Đưa dữ liệu vào token
-
-        return response()->json(compact('token'));
+        // Lấy thông tin về thời gian hết hạn của token
+        $expirationDate = Carbon::now()->addMinutes(config('jwt.ttl'));
+        $minutesUntilExpire = $expirationDate->diffInMinutes();
+        return response()->json([
+            'token' => $token,
+            'expires_at' => $minutesUntilExpire,
+        ]);
     }
 
     public function register(Request $request)

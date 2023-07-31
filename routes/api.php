@@ -58,7 +58,8 @@ Route::prefix('admin')->name('admin.')->middleware('jwt.auth')->group(function (
     Route::post('/danh-muc-cong-ty/create', [DanhMucCongTyController::class, 'store'])->name('addDanhMucCongTy');
     Route::post('/danh-muc-cong-ty/edit/{id}', [DanhMucCongTyController::class, 'update'])->name('updateDanhMucCongTy');
     Route::delete('/danh-muc-cong-ty/delete/{id}', [DanhMucCongTyController::class, 'destroy'])->name('deleteDanhMucCongTy');
-
+    Route::get('/danh-muc-cong-ty/{id}', [DanhMucCongTyController::class, 'show'])->name('GetOneDanhMucCongTy');
+    
     // posts
     Route::prefix('post')->name('posts.')->group(function () {
         Route::get('/', [PostsController::class, 'index'])->name('index');
