@@ -2,10 +2,16 @@
 
 namespace Database\Seeders;
 
+use App\Models\LoaiPhong;
+use App\Models\Phong;
+use App\Models\PhongThietBi;
+use App\Models\SanPham;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Tang;
+use App\Models\ThietBi;
 
 class DatabaseSeeder extends Seeder
 {
@@ -46,23 +52,30 @@ class DatabaseSeeder extends Seeder
         //     }
         // }
 
-        DB::table('modules')->insert([
-            'name' => 'users',
-            'title' => 'Quản lý người dùng',
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ]);
-        DB::table('modules')->insert([
-            'name' => 'groups',
-            'title' => 'Quản lý nhóm',
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ]);
-        DB::table('modules')->insert([
-            'name' => 'posts',
-            'title' => 'Quản lý bài viết',
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ]);
+        // DB::table('modules')->insert([
+        //     'name' => 'users',
+        //     'title' => 'Quản lý người dùng',
+        //     'created_at' => date('Y-m-d H:i:s'),
+        //     'updated_at' => date('Y-m-d H:i:s'),
+        // ]);
+        // DB::table('modules')->insert([
+        //     'name' => 'groups',
+        //     'title' => 'Quản lý nhóm',
+        //     'created_at' => date('Y-m-d H:i:s'),
+        //     'updated_at' => date('Y-m-d H:i:s'),
+        // ]);
+        // DB::table('modules')->insert([
+        //     'name' => 'posts',
+        //     'title' => 'Quản lý bài viết',
+        //     'created_at' => date('Y-m-d H:i:s'),
+        //     'updated_at' => date('Y-m-d H:i:s'),
+        // ]);
+
+        //Tang::factory()->count(10)->create();
+        // Phong::factory()->count(10)->create();
+        //LoaiPhong::factory()->count(10)->create();
+      //  ThietBi::factory()->count(10)->create();
+       // PhongThietBi::factory()->count(10)->create();
+       SanPham::factory()->count(10)->create();
     }
 }

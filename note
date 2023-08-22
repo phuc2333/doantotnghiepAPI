@@ -2,3 +2,13 @@ Nếu cài đặt laravel passport lỗi thì dùng lệnh này cài đặt
 - composer require laravel/passport --with-all-dependencies 
 
 test
+
+-- lenh tao data cho cac bang trong laravel
+
+php artisan make:model Phong  -> tao model cho các bảng
+
+php artisan make:factory PhongFactory => tao factory cho tabel
+
+php artisan db:seed --class=DatabaseSeeder => lênh tạo dữ liệu cho table mong muốn
+
+
