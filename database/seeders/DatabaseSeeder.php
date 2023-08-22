@@ -71,11 +71,11 @@ class DatabaseSeeder extends Seeder
         //     'updated_at' => date('Y-m-d H:i:s'),
         // ]);
 
-        //Tang::factory()->count(10)->create();
-        // Phong::factory()->count(10)->create();
-        //LoaiPhong::factory()->count(10)->create();
-      //  ThietBi::factory()->count(10)->create();
-       // PhongThietBi::factory()->count(10)->create();
-       SanPham::factory()->count(10)->create();
+        Tang::factory()->count(10)->create();
+        LoaiPhong::factory()->count(10)->create();
+        Phong::factory()->count(10)->create();
+        ThietBi::factory()->count(10)->create();
+        PhongThietBi::factory()->count(10)->create();
+        SanPham::factory()->count(10)->create();
     }
 }
