@@ -11,4 +11,6 @@ php artisan make:factory PhongFactory => tao factory cho tabel
 
 php artisan db:seed --class=DatabaseSeeder => lênh tạo dữ liệu cho table mong muốn
 
+data phan quyen:
+---- {"room":["view","add","edit"]} ----
 

@@ -25,20 +25,18 @@ class CheckPermission
                 $module = $value;
             }
         }
-
         // Sử dụng Auth middleware để xác thực người dùng
        // $user = Auth::user();
        $user = Auth::user();
-      
         // Lấy thông tin về vai trò của người dùng
         $roleJson = $user->group->permission;
-       
+   
         $roleArr = json_decode($roleJson, true);
-       
+    
         // Kiểm tra vai trò của người dùng có chứa quyền truy cập vào module cần kiểm tra không
-        if (isRole($roleArr, $module)) {
+        if (isRole($roleArr, $module)) { 
             // Nếu có, tiếp tục thực hiện các middleware tiếp theo trong chuỗi middleware
-            //return $next($request);
+            return $next($request);
             return response()->json([
                 'message' => 'Bạn có quyền truy cập vào module '
             ], 403);

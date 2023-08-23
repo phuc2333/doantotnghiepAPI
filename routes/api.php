@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DanhMucCongTyController;
 use App\Http\Controllers\Admin\GroupsController;
+use App\Http\Controllers\Admin\PhongController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Api\RegisterController;
 use App\Models\User;
@@ -93,5 +94,10 @@ Route::prefix('admin')->name('admin.')->middleware('jwt.auth')->group(function (
         Route::post('/edit/{id}', [UsersController::class, 'Useredit'])->middleware('checkPermissionCRUD')->name('editUser');
 
         Route::get('/delete/{id}', [UsersController::class, 'delete'])->middleware('checkPermissionCRUD')->name('delete');
+    });
+
+    // lay danh sach phong trong Module order theo đoàn
+    Route::prefix('room')->name('room.')->middleware('checkPermission')->group(function () {
+        Route::get('/danhsachphongtrong', [PhongController::class, 'LayDanhSachPhongTrong'])->middleware('checkPermissionCRUD')->name('view');
     });
 });
