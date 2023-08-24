@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DanhMucCongTyController;
+use App\Http\Controllers\Admin\DatPhongController;
 use App\Http\Controllers\Admin\GroupsController;
 use App\Http\Controllers\Admin\PhongController;
 use App\Http\Controllers\Admin\UsersController;
@@ -104,5 +105,10 @@ Route::prefix('admin')->name('admin.')->middleware('jwt.auth')->group(function (
     // danh sach dich vu
     Route::prefix('service')->name('service.')->middleware('checkPermission')->group(function () {
         Route::get('/danhsachdichvu', [PhongController::class, 'LayDanhSachDichVu'])->middleware('checkPermissionCRUD')->name('view');
+    });
+
+    // dat phong
+    Route::prefix('orderOffline')->name('orderOffline.')->middleware('checkPermission')->group(function () {
+        Route::post('/datphongtheodoan', [DatPhongController::class, 'DatPhongTheoDoan'])->middleware('checkPermissionCRUD')->name('add');
     });
 });

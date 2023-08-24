@@ -36,7 +36,7 @@ class checkpermissionCRUD
         $roleJson = $user->group->permission;
 
         $roleArr = json_decode($roleJson, true);
-        
+     
         // Kiểm tra vai trò của người dùng có chứa quyền truy cập vào module cần kiểm tra không
         if (isRole($roleArr,$module,$action)) {
             // Nếu có, tiếp tục thực hiện các middleware tiếp theo trong chuỗi middleware
