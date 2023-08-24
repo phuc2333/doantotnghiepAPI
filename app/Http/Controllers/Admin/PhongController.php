@@ -18,4 +18,10 @@ class PhongController extends Controller
         ->get();
         return response()->json($DataRoomEmpty);
     }
+
+    public function LayDanhSachDichVu()
+    {
+        $DataDichVu = DB::table('sanpham')->select('sanpham.id as id','sanpham.TenSanPham as name','sanpham.DonGia as price')->get();
+        return response()->json($DataDichVu);
+    }
 }

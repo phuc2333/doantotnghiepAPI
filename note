@@ -13,4 +13,12 @@ php artisan db:seed --class=DatabaseSeeder => lênh tạo dữ liệu cho table 
 
 data phan quyen:
 ---- {"room":["view","add","edit"]} ----
+Lưu y khi check quyền module vs quyền chức năng cho từng user
+phần permision lưu trong database cần phải lưu giống vs
+phần name trong router api
+VD:     // danh sach dich vu
+    Route::prefix('service')->name('service.')->middleware('checkPermission')->group(function () {
+        Route::get('/danhsachdichvu', [PhongController::class, 'LayDanhSachDichVu'])->middleware('checkPermissionCRUD')->name('view');
+    });
 
+=> như cái trên name: là view thì db cũng cân lưu vd quyền ở module service ("service":["view","add","edit"])

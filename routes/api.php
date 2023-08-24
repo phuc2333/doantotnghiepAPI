@@ -100,4 +100,9 @@ Route::prefix('admin')->name('admin.')->middleware('jwt.auth')->group(function (
     Route::prefix('room')->name('room.')->middleware('checkPermission')->group(function () {
         Route::get('/danhsachphongtrong', [PhongController::class, 'LayDanhSachPhongTrong'])->middleware('checkPermissionCRUD')->name('view');
     });
+
+    // danh sach dich vu
+    Route::prefix('service')->name('service.')->middleware('checkPermission')->group(function () {
+        Route::get('/danhsachdichvu', [PhongController::class, 'LayDanhSachDichVu'])->middleware('checkPermissionCRUD')->name('view');
+    });
 });

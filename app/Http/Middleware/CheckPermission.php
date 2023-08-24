@@ -38,8 +38,8 @@ class CheckPermission
             // Nếu có, tiếp tục thực hiện các middleware tiếp theo trong chuỗi middleware
             return $next($request);
             return response()->json([
-                'message' => 'Bạn có quyền truy cập vào module '
-            ], 403);
+                'message' => 'Bạn có quyền truy cập vào module'
+            ], 200);
         } else {
             // Nếu không, trả về một HTTP response với mã lỗi 403 (Forbidden)
             return response()->json([
