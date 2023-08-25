@@ -17,6 +17,7 @@ return new class extends Migration
             // add new columns
             $table->string('TongTien'); 
             $table->string('SoLuongSanPham');
+            $table->string('Ghichu');
         });
     }
 

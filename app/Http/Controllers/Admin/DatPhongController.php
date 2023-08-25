@@ -10,17 +10,24 @@ class DatPhongController extends Controller
 {
     public function DatPhongTheoDoan(Request $request)
     {
-        $datphong = new DatPhong();
-        $datphong->id_KH = $request->idKH;
-        $datphong->id_Phong = $request->idPhong;
-        $datphong->NgayDat = $request->NgayDat;
-        $datphong->NgayTra = $request->NgayTra;
-        $datphong->U_id = $request->U_id;
-        $datphong->id_SP = $request->idsp;
-        $datphong->status = $request->input('email');
-        $datphong->TongTien = $request->input('email');
-        $datphong->SoLuongSanPham = $request->input('email');
-       // $datphong->save();
-        return response()->json($request->dichVuDat, 200);
+        // xu ly lay du lieu danh sach dich vu dat
+        $dataDichVuDat_Phong_Khach_Hang = $request;
+        foreach ($dataDichVuDat_Phong_Khach_Hang["phong"] as $phong) {
+            foreach ($phong["dichVuDat"] as $dichVu) {
+                $datphong = new DatPhong();
+                $datphong->id_KH = $request->idKH;
+                $datphong->id_Phong = $phong['idPhong'];
+                $datphong->NgayDat = $request->NgayDat;
+                $datphong->NgayTra = $request->NgayTra;
+                $datphong->U_id = $request->U_id;
+                $datphong->status = $request->TrangThai;
+                $datphong->Ghichu = $request->Ghichu;
+                $datphong->TongTien = $phong['tongtien'];
+                $datphong->SoLuongSanPham = $dichVu['soLuong'];
+                $datphong->id_SP = $dichVu['idsp'];
+                $datphong->save();
+            }
+        }
+        return response()->json($request, 200);
     }
 }

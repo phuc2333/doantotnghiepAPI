@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('sanpham', function (Blueprint $table) {
-            $table->renameColumn('LoaiPhong', 'TenSanPham');
+        Schema::table('datphong', function (Blueprint $table) {
+            $table->string('NgayDat', 255)->change();
         });
     }
 
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down()
     {
-       //
+        //
     }
 };
