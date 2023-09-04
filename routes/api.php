@@ -108,7 +108,7 @@ Route::prefix('admin')->name('admin.')->middleware('jwt.auth')->group(function (
     });
 
     // dat phong
-    Route::prefix('orderOffline')->name('orderOffline.')->middleware('checkPermission')->group(function () {
+    Route::prefix('orderOffline')->name('orderOffline.')->middleware('checkPermission','cors')->group(function () {
         Route::post('/datphongtheodoan', [DatPhongController::class, 'DatPhongTheoDoan'])->middleware('checkPermissionCRUD')->name('add');
     });
 });
