@@ -10,11 +10,9 @@ class DatPhongController extends Controller
 {
     public function DatPhongTheoDoan(Request $request)
     {
-        // Sử dụng $request->json() để truy cập dữ liệu JSON
         $dataDichVuDat_Phong_Khach_Hang = $request->all();
         $dataDatPhongTheoDoan = $dataDichVuDat_Phong_Khach_Hang['_value'];
     
-        // Truy cập các phần tử cụ thể trong mảng
         $id_KH = $dataDatPhongTheoDoan['idKH'];
         $NgayDat = $dataDatPhongTheoDoan['NgayDat'];
         $NgayTra = $dataDatPhongTheoDoan['NgayTra'];
@@ -22,14 +20,15 @@ class DatPhongController extends Controller
         $Ghichu = $dataDatPhongTheoDoan['Ghichu'];
         $U_id = 2;
         $TongTien = $dataDatPhongTheoDoan['tongtien'];
-        $tongsoluongsanpham = 0;
     
         // Truy cập và lặp qua tất cả các phần tử trong mảng "phong"
-       
+    
         foreach ($dataDatPhongTheoDoan['phong'] as $phongItem) {
             // Kiểm tra xem key 'idPhong' có tồn tại trong phần tử hiện tại hay không
             if (array_key_exists('idPhong', $phongItem)) {
-                
+                // Tạo một biến mới để tính tổng số lượng sản phẩm cho phòng hiện tại
+                $tongsoluongsanpham = 0;
+    
                 // Kiểm tra xem mảng "dichVuDat" của từng phòng có dữ liệu hay không
                 if (isset($phongItem["dichVuDat"]) && !empty($phongItem["dichVuDat"])) {
                     // Lặp qua các dịch vụ đặt cho phòng và lưu thông tin

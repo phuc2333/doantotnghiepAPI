@@ -27,13 +27,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('passport-token',function(){
+Route::get('passport-token', function () {
     $user = User::find(6);
     $tokenResult = $user->createToken('auth_api');
     // Thiet lap expried
     $token = $tokenResult->token;
     $token->expires_at = Carbon::now()->addMinutes(60);
-    
+
     // Tra ve access token
     $accessToken = $tokenResult->accessToken;
 
@@ -43,25 +43,25 @@ Route::get('passport-token',function(){
         'access_token' => $accessToken,
         'expies' => $expires
     ];
-     return $response;
+    return $response;
 });
 Auth::routes([]);
 // api dang ky dang nhap
-Route::post('register',[RegisterController::class,'register']);
-Route::post('login',[RegisterController::class,'login']);
+Route::post('register', [RegisterController::class, 'register']);
+Route::post('login', [RegisterController::class, 'login']);
 
-Route::post('logout',[RegisterController::class,'logout']);
+Route::post('logout', [RegisterController::class, 'logout']);
 // api phan quyen
 Route::prefix('admin')->name('admin.')->middleware('jwt.auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
-   
+
     // crud danh muc cong ty
     Route::get('/danh-muc-cong-ty', [DanhMucCongTyController::class, 'index'])->name('GetDanhMucCongTy');
     Route::post('/danh-muc-cong-ty/create', [DanhMucCongTyController::class, 'store'])->name('addDanhMucCongTy');
     Route::put('/danh-muc-cong-ty/edit/{id}', [DanhMucCongTyController::class, 'update'])->name('updateDanhMucCongTy');
     Route::delete('/danh-muc-cong-ty/delete/{id}', [DanhMucCongTyController::class, 'destroy'])->name('deleteDanhMucCongTy');
     Route::get('/danh-muc-cong-ty/{id}', [DanhMucCongTyController::class, 'show'])->name('GetOneDanhMucCongTy');
-    
+
     // posts
     Route::prefix('post')->name('posts.')->group(function () {
         Route::get('/', [PostsController::class, 'index'])->name('index');
@@ -108,7 +108,7 @@ Route::prefix('admin')->name('admin.')->middleware('jwt.auth')->group(function (
     });
 
     // dat phong
-    Route::prefix('orderOffline')->name('orderOffline.')->middleware('checkPermission','cors')->group(function () {
+    Route::prefix('orderOffline')->name('orderOffline.')->middleware('checkPermission', 'cors')->group(function () {
         Route::post('/datphongtheodoan', [DatPhongController::class, 'DatPhongTheoDoan'])->middleware('checkPermissionCRUD')->name('add');
     });
 });
