@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class PhongController extends Controller
@@ -23,5 +22,48 @@ class PhongController extends Controller
     {
         $DataDichVu = DB::table('sanpham')->select('sanpham.id as id','sanpham.TenSanPham as name','sanpham.DonGia as price')->get();
         return response()->json($DataDichVu);
+    }
+
+    public function RoomAll()
+    {
+        $data = [];
+        $newData = [];
+        $data = DB::table('Tang')->select('TenTang', 'tenphong','TrangThai')
+        ->join('phong', 'Tang.id', '=', 'phong.idTang')
+        ->get();
+        foreach ($data as $item) {
+            $tangName = $item->TenTang;
+            $phongName = $item->tenphong;
+            $trangThai = $item->TrangThai;
+        
+            // Kiểm tra xem đã có tầng này trong mảng $newData chưa
+            $tangExists = false;
+            foreach ($newData as &$newItem) {
+                if ($newItem['name'] === $tangName) {
+                    $tangExists = true;
+                    $newItem['phongs'][] = [
+                        'name' => $phongName,
+                        'price' => '12000', // Bạn có thể thay đổi giá theo logic của bạn
+                        'status' => $trangThai,
+                    ];
+                    break;
+                }
+            }
+        
+            // Nếu tầng chưa tồn tại, thêm nó vào mảng $newData
+            if (!$tangExists) {
+                $newData[] = [
+                    'name' => $tangName,
+                    'phongs' => [
+                        [
+                            'name' => $phongName,
+                            'price' => '12000', // Bạn có thể thay đổi giá theo logic của bạn
+                            'status' => $trangThai,
+                        ],
+                    ],
+                ];
+            }
+        }
+        return response()->json($newData);
     }
 }

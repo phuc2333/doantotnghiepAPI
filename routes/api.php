@@ -111,4 +111,9 @@ Route::prefix('admin')->name('admin.')->middleware('jwt.auth')->group(function (
     Route::prefix('orderOffline')->name('orderOffline.')->middleware('checkPermission', 'cors')->group(function () {
         Route::post('/datphongtheodoan', [DatPhongController::class, 'DatPhongTheoDoan'])->middleware('checkPermissionCRUD')->name('add');
     });
+
+    // lay thong tin phong
+    Route::prefix('home')->name('home.')->middleware('checkPermission', 'cors')->group(function () {
+        Route::get('/room', [PhongController::class, 'RoomAll'])->middleware('checkPermissionCRUD')->name('view');
+    });
 });
