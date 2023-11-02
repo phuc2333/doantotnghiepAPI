@@ -12,29 +12,31 @@ class DatPhongController extends Controller
     {
         $dataDichVuDat_Phong_Khach_Hang = $request->all();
         $dataDatPhongTheoDoan = $dataDichVuDat_Phong_Khach_Hang['_value'];
-    
+
+        $ma_hd = $dataDatPhongTheoDoan['mahd'];
         $id_KH = $dataDatPhongTheoDoan['idKH'];
         $NgayDat = $dataDatPhongTheoDoan['NgayDat'];
         $NgayTra = $dataDatPhongTheoDoan['NgayTra'];
         $status = $dataDatPhongTheoDoan['TrangThai'];
         $Ghichu = $dataDatPhongTheoDoan['Ghichu'];
-        $U_id = 2;
+        $U_id = 3;
         $TongTien = $dataDatPhongTheoDoan['tongtien'];
-    
+
         // Truy cập và lặp qua tất cả các phần tử trong mảng "phong"
-    
+
         foreach ($dataDatPhongTheoDoan['phong'] as $phongItem) {
             // Kiểm tra xem key 'idPhong' có tồn tại trong phần tử hiện tại hay không
             if (array_key_exists('idPhong', $phongItem)) {
                 // Tạo một biến mới để tính tổng số lượng sản phẩm cho phòng hiện tại
                 $tongsoluongsanpham = 0;
-    
+
                 // Kiểm tra xem mảng "dichVuDat" của từng phòng có dữ liệu hay không
                 if (isset($phongItem["dichVuDat"]) && !empty($phongItem["dichVuDat"])) {
                     // Lặp qua các dịch vụ đặt cho phòng và lưu thông tin
                     foreach ($phongItem["dichVuDat"] as $dichVu) {
                         $datphong = new DatPhong();
                         $id_Phong = $phongItem['idPhong'];
+                        $datphong->ma_hd = $ma_hd;
                         $datphong->id_KH = $id_KH;
                         $datphong->NgayDat = $NgayDat;
                         $datphong->NgayTra = $NgayTra;
@@ -51,6 +53,7 @@ class DatPhongController extends Controller
                 } else {
                     // Xử lý trường hợp không có dịch vụ cho phòng này, chỉ lưu thông tin phòng
                     $datphong = new DatPhong();
+                    $datphong->ma_hd = $ma_hd;
                     $datphong->id_KH = $id_KH;
                     $datphong->NgayDat = $NgayDat;
                     $datphong->NgayTra = $NgayTra;
@@ -65,10 +68,10 @@ class DatPhongController extends Controller
                 }
             }
         }
-    
+
         return response()->json([
             'message' => 'Dữ liệu đã được lưu thành công cho các lần đặt phòng',
         ], 200);
     }
-    
+
 }
