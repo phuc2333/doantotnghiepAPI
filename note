@@ -22,4 +22,3 @@ VD:     // danh sach dich vu
     });
 
 => như cái trên name: là view thì db cũng cân lưu vd quyền ở module service ("service":["view","add","edit"])
- test thay doi
