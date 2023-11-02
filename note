@@ -1,5 +1,5 @@
 Nếu cài đặt laravel passport lỗi thì dùng lệnh này cài đặt
-- composer require laravel/passport --with-all-dependencies 
+- composer require laravel/passport --with-all-dependencies
 
 test
 
@@ -22,3 +22,4 @@ VD:     // danh sach dich vu
     });
 
 => như cái trên name: là view thì db cũng cân lưu vd quyền ở module service ("service":["view","add","edit"])
+ test thay doi
